@@ -92,7 +92,7 @@
         </inertial>
     </link>
 
-	<!-- Camera properties -->
+	<!-- Camera properties 
 	<joint name="camera_rgb_joint" type="fixed">
 		<parent link="head_tilt_link" />
 		<child link="camera_rgb_optical_frame" />
@@ -141,7 +141,7 @@
                 izz="1.0" />
         </inertial>
     </link>
-
+	-->
 	<!-- IMU properties -->
 	<joint name="imu_joint" type="fixed">
 		<parent link="base_link" />
