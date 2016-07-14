@@ -2,7 +2,7 @@
 <!-- Full bringup no visual nodes launch file ( Normal use, visual ran on remote desktop ) -->
 
 <launch>
-    <arg name="config" default="hexapod"/>
+    <arg name="config" default="phantomX"/>
     <arg name="joy_mapping" default="joystick"/>
     <!-- Launching sound first since some packages have initial sounds -->
     <include file="$(find hexapod_bringup)/launch/components/sounds.launch" />
