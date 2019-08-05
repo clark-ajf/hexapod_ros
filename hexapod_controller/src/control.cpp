@@ -245,7 +245,7 @@ void Control::publishJointStates( const hexapod_msgs::LegsJoints &legs, const he
     {
         case 1:
             joint_state->name[i] = servo_names_[i];
-            joint_state->position[i] = head_.yaw;
+            joint_state->position[i] = head_.pitch;
             i++;
             break;
         case 2:
