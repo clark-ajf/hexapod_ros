@@ -54,7 +54,7 @@ BODY_MAX_ROLL: !degrees 8
 BODY_MAX_PITCH: !degrees 8
 
 # Body Standing Height
-STANDING_BODY_HEIGHT: 0.09
+STANDING_BODY_HEIGHT: 0.08
 
 # Head FK maximum rotation
 HEAD_MAX_YAW: !degrees 55
@@ -64,11 +64,11 @@ HEAD_MAX_PITCH: !degrees 25
 MAX_BODY_ROLL_COMP: !degrees 12
 MAX_BODY_PITCH_COMP: !degrees 12
 COMPENSATE_INCREMENT: !degrees 0.01
-COMPENSATE_TO_WITHIN: !degrees 0.5
+COMPENSATE_TO_WITHIN: !degrees 1.5
 
 # Gait Settings
 CYCLE_LENGTH: 50
-LEG_LIFT_HEIGHT: 0.038
+LEG_LIFT_HEIGHT: 0.042
 MAX_LIFT_HEIGHT: 0.050
 
 GAIT_STYLE: "RIPPLE"
@@ -95,5 +95,5 @@ SERVOS: {
     '16': {name: coxa_joint_LF, type: AX, id: 19, ticks: 1024, center: 512, max_radians: !degrees 300, sign: 1, offset: !degrees 0},
     '17': {name: femur_joint_LF, type: AX, id: 3, ticks: 1024, center: 512, max_radians: !degrees 300, sign: 1, offset: !degrees 14},
     '18': {name: tibia_joint_LF, type: AX, id: 5, ticks: 1024, center: 512, max_radians: !degrees 300, sign: 1, offset: !degrees -48},
-    '19': {name: tilt_joint, type: AX, id: 20, ticks: 1024, center: 512, max_radians: !degrees 50, sign: 1, offset: !degrees 0}
+    '19': {name: head_tilt_joint, type: AX, id: 20, ticks: 1024, center: 512, max_radians: !degrees 50, sign: 1, offset: !degrees 0}
 }
