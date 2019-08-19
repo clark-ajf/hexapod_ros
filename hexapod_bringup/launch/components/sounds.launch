@@ -4,4 +4,5 @@
 <launch>
     <node name="Sound_Play" pkg="sound_play" type="soundplay_node.py" />
     <node name="Hexapod_Sounds" pkg="hexapod_sound" type="hexapod_sound" />
+    <param name="device" value="hw:1,0" />
 </launch>

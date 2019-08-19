@@ -54,7 +54,7 @@ BODY_MAX_ROLL: !degrees 8
 BODY_MAX_PITCH: !degrees 8
 
 # Body Standing Height
-STANDING_BODY_HEIGHT: 0.08
+STANDING_BODY_HEIGHT: 0.07
 
 # Head FK maximum rotation
 HEAD_MAX_YAW: !degrees 55
@@ -68,12 +68,12 @@ COMPENSATE_TO_WITHIN: !degrees 1.5
 
 # Gait Settings
 CYCLE_LENGTH: 50
-LEG_LIFT_HEIGHT: 0.042
+LEG_LIFT_HEIGHT: 0.035
 MAX_LIFT_HEIGHT: 0.050
 
 GAIT_STYLE: "RIPPLE"
 # Speed in Hz that the servos interpolate between gait poses
-INTERPOLATION_LOOP_RATE: 550
+INTERPOLATION_LOOP_RATE: 1000
 
 # Servo descriptions
 SERVOS: {

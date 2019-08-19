@@ -33,6 +33,7 @@
 
 #include <ros/ros.h>
 #include <sensor_msgs/Joy.h>
+#include <std_msgs/Int32.h>
 #include <std_msgs/Bool.h>
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/AccelStamped.h>
@@ -58,7 +59,7 @@ class HexapodTeleopJoystick
         void joyCallback( const sensor_msgs::Joy::ConstPtr &joy );
         ros::NodeHandle nh_;
         ros::Subscriber joy_sub_;
-        int STANDUP_BUTTON, SITDOWN_BUTTON, BODY_ROTATION_BUTTON, FORWARD_BACKWARD_AXES, LEFT_RIGHT_AXES, YAW_ROTATION_AXES, PITCH_ROTATION_AXES;
+        int STANDUP_BUTTON, SITDOWN_BUTTON, BODY_ROTATION_BUTTON, HEAD_ROTATION_BUTTON, FORWARD_BACKWARD_AXES, LEFT_RIGHT_AXES, YAW_ROTATION_AXES, PITCH_ROTATION_AXES;
         double MAX_METERS_PER_SEC, MAX_RADIANS_PER_SEC;
 };
 

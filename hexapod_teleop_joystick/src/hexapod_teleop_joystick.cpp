@@ -42,6 +42,7 @@ HexapodTeleopJoystick::HexapodTeleopJoystick( void )
     ros::param::get( "STANDUP_BUTTON", STANDUP_BUTTON );
     ros::param::get( "SITDOWN_BUTTON", SITDOWN_BUTTON );
     ros::param::get( "BODY_ROTATION_BUTTON", BODY_ROTATION_BUTTON );
+    ros::param::get( "HEAD_ROTATION_BUTTON", HEAD_ROTATION_BUTTON );
     ros::param::get( "FORWARD_BACKWARD_AXES", FORWARD_BACKWARD_AXES );
     ros::param::get( "LEFT_RIGHT_AXES", LEFT_RIGHT_AXES );
     ros::param::get( "YAW_ROTATION_AXES", YAW_ROTATION_AXES );
@@ -50,6 +51,7 @@ HexapodTeleopJoystick::HexapodTeleopJoystick( void )
     ros::param::get( "MAX_RADIANS_PER_SEC", MAX_RADIANS_PER_SEC );
     ros::param::get( "NON_TELEOP", NON_TELEOP );
     joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 5, &HexapodTeleopJoystick::joyCallback, this);
+    sound_sub_ = nh_.subscribe<std_msgs::Int32>("/sound_direction", 5, &HexapodTeleopJoystick::joyCallback, this);
     body_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/body_scalar", 100);
     head_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/head_scalar", 100);
     cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 100);
@@ -85,12 +87,17 @@ void HexapodTeleopJoystick::joyCallback( const sensor_msgs::Joy::ConstPtr &joy )
     {
         imu_override_.data = true;
         body_scalar_.header.stamp = current_time;
-        body_scalar_.accel.angular.x = -joy->axes[LEFT_RIGHT_AXES];
-        body_scalar_.accel.angular.y = -joy->axes[FORWARD_BACKWARD_AXES];
+        body_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
+        body_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
+    }
+    
+    else if( joy->buttons[HEAD_ROTATION_BUTTON] == 1 )
+    {
+        imu_override_.data = true;
         head_scalar_.header.stamp = current_time;
         head_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
         head_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
-    }
+    } 
     else
     {
         imu_override_.data = false;
@@ -102,6 +109,8 @@ void HexapodTeleopJoystick::joyCallback( const sensor_msgs::Joy::ConstPtr &joy )
         cmd_vel_.linear.x = joy->axes[FORWARD_BACKWARD_AXES] * MAX_METERS_PER_SEC;
         cmd_vel_.linear.y = -joy->axes[LEFT_RIGHT_AXES] * MAX_METERS_PER_SEC;
         cmd_vel_.angular.z = joy->axes[YAW_ROTATION_AXES] * MAX_RADIANS_PER_SEC;
+        cmd_vel_.angular.z = Int32->data * MAX_RADIANS_PER_SEC;
+        
     }
 }
 

@@ -12,6 +12,11 @@ SITDOWN_BUTTON: 0
 # "L1" button
 BODY_ROTATION_BUTTON: 4
 
+# "L2" button
+HEAD_ROTATION_BUTTON: 5
+
+
+
 # Left joystick up/down
 FORWARD_BACKWARD_AXES: 1
 
