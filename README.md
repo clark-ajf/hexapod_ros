@@ -40,13 +40,11 @@ sudo apt-get install -y ros-melodic-gazebo-ros-control &&
 sudo apt-get install -y ros-melodic-navigation &&
 sudo apt-get install -y ros-melodic-navfn &&
 sudo apt-get install -y ros-melodic-amcl &&
+
 sudo apt-get install libusb-1.0-0-dev
 
-<<<<<<< HEAD
-sudo apt-get install -y ros-melodic-move_base 
-=======
-sudo apt-get install -y ros-melodic-movebase
->>>>>>> c35331b13ffff477846b2dafa2baef4173c0d3f7
+sudo apt-get install ros-indigo-move_base
+
 
 ```
 
