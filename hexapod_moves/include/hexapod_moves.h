@@ -28,8 +28,8 @@
 // Author: Kevin M. Ochs
 
 
-#ifndef HEXAPOD_TELEOP_H_
-#define HEXAPOD_TELEOP_H_
+#ifndef HEXAPOD_MOVES_H_
+#define HEXAPOD_MOVES_H_
 
 #include <ros/ros.h>
 #include <sensor_msgs/Joy.h>
@@ -38,7 +38,7 @@
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/AccelStamped.h>
 
-class HexapodTeleopJoystick
+class HexapodMoves
 {
     public:
         HexapodMoves( void );
@@ -63,4 +63,4 @@ class HexapodTeleopJoystick
         double MAX_METERS_PER_SEC, MAX_RADIANS_PER_SEC;
 };
 
-#endif // HEXAPOD_TELEOP_H_
+#endif // HEXAPOD_MOVES_H_
