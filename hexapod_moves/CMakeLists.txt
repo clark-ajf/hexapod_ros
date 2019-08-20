@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(hexapod_teleop_joystick)
+project(hexapod_moves)
 
 find_package( catkin REQUIRED COMPONENTS nodelet roscpp sensor_msgs hexapod_msgs )
 
@@ -11,9 +11,9 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-add_executable( hexapod_teleop_joystick src/hexapod_teleop_joystick.cpp ) 
-target_link_libraries( hexapod_teleop_joystick ${catkin_LIBRARIES} )
-add_dependencies( hexapod_teleop_joystick hexapod_msgs_generate_messages_cpp )
+add_executable( hexapod_moves src/hexapod_moves.cpp ) 
+target_link_libraries( hexapod_moves ${catkin_LIBRARIES} )
+add_dependencies( hexapod_moves hexapod_msgs_generate_messages_cpp )
 
 install(TARGETS hexapod_teleop_joystick
    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
@@ -30,7 +30,7 @@ install(DIRECTORY launch/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
 
-install(FILES hexapod_teleop_joystick.xml
+install(FILES hexapod_moves.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
   
  
