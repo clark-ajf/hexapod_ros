@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package>
-  <name>hexapod_teleop_joystick</name>
-  <version>0.2.0</version>
-  <description>hexapod_teleop_joystick node for hexapod research platform</description>
-  <author email="kevin.ochs@gmail.com">Kevin Ochs</author>
-  <maintainer email="kevin.ochs@gmail.com">Kevin Ochs</maintainer>
+  <name>hexapod_moves</name>
+  <version>0.1.0</version>
+  <description>hexapod_moves node for hexapod research platform</description>
+  <author email="Creedynzus@gmail.com">Andrew Creahan</author>
+  <maintainer email="Creedynzus@gmail.com">Andrew Creahan</maintainer>
   <license>BSD</license>
   
   <url type="website">http://ros.org</url>
@@ -20,6 +20,6 @@
   <run_depend>sensor_msgs</run_depend>
 
   <export>
-    <nodelet plugin="${prefix}/hexapod_teleop_joystick.xml" />
+    <nodelet plugin="${prefix}/hexapod_moves.xml" />
   </export>
 </package>
