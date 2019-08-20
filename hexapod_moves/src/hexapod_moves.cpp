@@ -1,5 +1,5 @@
 
-// ROS Hexapod Teleop Joystick Node
+// ROS Hexapod Moves Node
 // Copyright (c) 2016, Kevin M. Ochs
 // All rights reserved.
 
@@ -25,16 +25,16 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// Author: Kevin M. Ochs
+// Author: Kevin M. Ochs updated by Andrew Creahan
 
 
-#include <hexapod_teleop_joystick.h>
+#include <hexapod_moves.h>
 
 //==============================================================================
 // Constructor
 //==============================================================================
 
-HexapodTeleopJoystick::HexapodTeleopJoystick( void )
+HexapodTeleopJoystick::HexapodMoves( void )
 {
     state_.data = false;
     imu_override_.data = false;
@@ -50,8 +50,7 @@ HexapodTeleopJoystick::HexapodTeleopJoystick( void )
     ros::param::get( "MAX_METERS_PER_SEC", MAX_METERS_PER_SEC );
     ros::param::get( "MAX_RADIANS_PER_SEC", MAX_RADIANS_PER_SEC );
     ros::param::get( "NON_TELEOP", NON_TELEOP );
-    joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 5, &HexapodTeleopJoystick::joyCallback, this);
-    sound_sub_ = nh_.subscribe<std_msgs::Int32>("/sound_direction", 5, &HexapodTeleopJoystick::joyCallback, this);
+    sound_sub_ = nh_.subscribe<std_msgs::Int32>("/sound_direction", 5, &HexapodTeleopMoves::soundCallback, this);
     body_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/body_scalar", 100);
     head_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/head_scalar", 100);
     cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 100);
@@ -63,61 +62,25 @@ HexapodTeleopJoystick::HexapodTeleopJoystick( void )
 // Joystick call reading joystick topics
 //==============================================================================
 
-void HexapodTeleopJoystick::joyCallback( const sensor_msgs::Joy::ConstPtr &joy )
+void HexapodMoves::soundCallback( const sensor_msgs::Sound::ConstPtr &sound )
 {
     ros::Time current_time = ros::Time::now();
-    if( joy->buttons[STANDUP_BUTTON] == 1 )
-    {
-        if ( state_.data == false)
-        {
-            state_.data = true;
-        }
-    }
-
-    if ( joy->buttons[SITDOWN_BUTTON] == 1 )
-    {
-        if ( state_.data == true)
-        {
-            state_.data = false;
-        }
-    }
-
-    // Body rotation L1 Button for testing
-    if( joy->buttons[BODY_ROTATION_BUTTON] == 1 )
-    {
-        imu_override_.data = true;
-        body_scalar_.header.stamp = current_time;
-        body_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
-        body_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
-    }
     
-    else if( joy->buttons[HEAD_ROTATION_BUTTON] == 1 )
-    {
-        imu_override_.data = true;
-        head_scalar_.header.stamp = current_time;
-        head_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
-        head_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
-    } 
-    else
-    {
-        imu_override_.data = false;
-    }
-
-    // Travelling
-    if( joy->buttons[BODY_ROTATION_BUTTON] != 1 )
-    {
-        cmd_vel_.linear.x = joy->axes[FORWARD_BACKWARD_AXES] * MAX_METERS_PER_SEC;
-        cmd_vel_.linear.y = -joy->axes[LEFT_RIGHT_AXES] * MAX_METERS_PER_SEC;
-        cmd_vel_.angular.z = joy->axes[YAW_ROTATION_AXES] * MAX_RADIANS_PER_SEC;
-        cmd_vel_.angular.z = Int32->data * MAX_RADIANS_PER_SEC;
+    imu_override_.data = true;
+    head_scalar_.header.stamp = current_time;
+    head_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
+    head_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
+    cmd_vel_.linear.x = joy->axes[FORWARD_BACKWARD_AXES] * MAX_METERS_PER_SEC;
+    cmd_vel_.linear.y = -joy->axes[LEFT_RIGHT_AXES] * MAX_METERS_PER_SEC;
+    cmd_vel_.angular.z = joy->axes[YAW_ROTATION_AXES] * MAX_RADIANS_PER_SEC;
+    cmd_vel_.angular.z = Int32->data * MAX_RADIANS_PER_SEC;
         
-    }
 }
 
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "hexapod_teleop_joystick");
-    HexapodTeleopJoystick hexapodTeleopJoystick;
+    HexapodSound hexapodSound;
 
     ros::AsyncSpinner spinner(1); // Using 1 threads
     spinner.start();
