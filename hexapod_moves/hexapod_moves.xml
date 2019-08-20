@@ -1,0 +1,9 @@
+<!-- hexapod_moves publisher -->
+<library path="lib/hexapod_moves">
+  <class name="hexapod_moves/hexapod_moves" type="hexapod_moves" 
+    base_class_type="nodelet::Nodelet">
+    <description>
+      hexapod_moves publisher.
+    </description>
+  </class>
+</library>
