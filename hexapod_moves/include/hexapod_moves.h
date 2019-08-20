@@ -41,7 +41,7 @@
 class HexapodTeleopJoystick
 {
     public:
-        HexapodTeleopJoystick( void );
+        HexapodMoves( void );
         std_msgs::Bool state_;
         std_msgs::Bool imu_override_;
         geometry_msgs::AccelStamped body_scalar_;
@@ -56,9 +56,9 @@ class HexapodTeleopJoystick
         bool NON_TELEOP; // Shuts down cmd_vel broadcast
 
     private:
-        void joyCallback( const sensor_msgs::Joy::ConstPtr &joy );
+        void soundCallback( const geometry_msgs::Pose::ConstPtr &sound );
         ros::NodeHandle nh_;
-        ros::Subscriber joy_sub_;
+        ros::Subscriber sound_sub_;
         int STANDUP_BUTTON, SITDOWN_BUTTON, BODY_ROTATION_BUTTON, HEAD_ROTATION_BUTTON, FORWARD_BACKWARD_AXES, LEFT_RIGHT_AXES, YAW_ROTATION_AXES, PITCH_ROTATION_AXES;
         double MAX_METERS_PER_SEC, MAX_RADIANS_PER_SEC;
 };
