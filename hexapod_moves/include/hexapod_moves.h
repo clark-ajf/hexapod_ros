@@ -56,7 +56,7 @@ class HexapodMoves
         bool NON_TELEOP; // Shuts down cmd_vel broadcast
 
     private:
-        void soundCallback( const geometry_msgs::Pose::ConstPtr &sound );
+   //     void soundCallback( const std_msgs::imu_override::ConstPtr &sound );
         ros::NodeHandle nh_;
         ros::Subscriber sound_sub_;
         int STANDUP_BUTTON, SITDOWN_BUTTON, BODY_ROTATION_BUTTON, HEAD_ROTATION_BUTTON, FORWARD_BACKWARD_AXES, LEFT_RIGHT_AXES, YAW_ROTATION_AXES, PITCH_ROTATION_AXES;

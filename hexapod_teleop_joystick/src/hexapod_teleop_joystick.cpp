@@ -51,7 +51,6 @@ HexapodTeleopJoystick::HexapodTeleopJoystick( void )
     ros::param::get( "MAX_RADIANS_PER_SEC", MAX_RADIANS_PER_SEC );
     ros::param::get( "NON_TELEOP", NON_TELEOP );
     joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 5, &HexapodTeleopJoystick::joyCallback, this);
-    sound_sub_ = nh_.subscribe<std_msgs::Int32>("/sound_direction", 5, &HexapodTeleopJoystick::joyCallback, this);
     body_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/body_scalar", 100);
     head_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/head_scalar", 100);
     cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 100);
@@ -109,7 +108,6 @@ void HexapodTeleopJoystick::joyCallback( const sensor_msgs::Joy::ConstPtr &joy )
         cmd_vel_.linear.x = joy->axes[FORWARD_BACKWARD_AXES] * MAX_METERS_PER_SEC;
         cmd_vel_.linear.y = -joy->axes[LEFT_RIGHT_AXES] * MAX_METERS_PER_SEC;
         cmd_vel_.angular.z = joy->axes[YAW_ROTATION_AXES] * MAX_RADIANS_PER_SEC;
-        cmd_vel_.angular.z = Int32->data * MAX_RADIANS_PER_SEC;
         
     }
 }

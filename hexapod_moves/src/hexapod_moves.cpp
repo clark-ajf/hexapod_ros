@@ -34,7 +34,7 @@
 // Constructor
 //==============================================================================
 
-HexapodTeleopJoystick::HexapodMoves( void )
+HexapodMoves::HexapodMoves( void )
 {
     state_.data = false;
     imu_override_.data = false;
@@ -50,7 +50,7 @@ HexapodTeleopJoystick::HexapodMoves( void )
     ros::param::get( "MAX_METERS_PER_SEC", MAX_METERS_PER_SEC );
     ros::param::get( "MAX_RADIANS_PER_SEC", MAX_RADIANS_PER_SEC );
     ros::param::get( "NON_TELEOP", NON_TELEOP );
-    sound_sub_ = nh_.subscribe<std_msgs::Int32>("/sound_direction", 5, &HexapodTeleopMoves::soundCallback, this);
+ //   sound_sub_ = nh_.subscribe<std_msgs::Int32>("/sound_direction", 5, &HexapodMoves::soundCallback, this);
     body_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/body_scalar", 100);
     head_scalar_pub_ = nh_.advertise<geometry_msgs::AccelStamped>("/head_scalar", 100);
     cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 100);
@@ -62,25 +62,25 @@ HexapodTeleopJoystick::HexapodMoves( void )
 // Joystick call reading joystick topics
 //==============================================================================
 
-void HexapodMoves::soundCallback( const sensor_msgs::Sound::ConstPtr &sound )
-{
-    ros::Time current_time = ros::Time::now();
+//void HexapodMoves::soundCallback//( const geometry_msgs::Sound::ConstPtr &sound )
+//{
+//    ros::Time current_time = ros::Time::now();
     
-    imu_override_.data = true;
-    head_scalar_.header.stamp = current_time;
-    head_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
-    head_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
-    cmd_vel_.linear.x = joy->axes[FORWARD_BACKWARD_AXES] * MAX_METERS_PER_SEC;
-    cmd_vel_.linear.y = -joy->axes[LEFT_RIGHT_AXES] * MAX_METERS_PER_SEC;
-    cmd_vel_.angular.z = joy->axes[YAW_ROTATION_AXES] * MAX_RADIANS_PER_SEC;
-    cmd_vel_.angular.z = Int32->data * MAX_RADIANS_PER_SEC;
+//    imu_override_.data = true;
+//    head_scalar_.header.stamp = current_time;
+//    head_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
+//    head_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
+//    cmd_vel_.linear.x = joy->axes[FORWARD_BACKWARD_AXES] * MAX_METERS_PER_SEC;
+//    cmd_vel_.linear.y = -joy->axes[LEFT_RIGHT_AXES] * MAX_METERS_PER_SEC;
+//    cmd_vel_.angular.z = joy->axes[YAW_ROTATION_AXES] * MAX_RADIANS_PER_SEC;
+//    cmd_vel_.angular.z = Int32->data * MAX_RADIANS_PER_SEC;
         
-}
+//}
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "hexapod_teleop_joystick");
-    HexapodSound hexapodSound;
+    ros::init(argc, argv, "hexapod_moves");
+    HexapodMoves hexapodMoves;
 
     ros::AsyncSpinner spinner(1); // Using 1 threads
     spinner.start();
@@ -88,14 +88,8 @@ int main(int argc, char** argv)
     ros::Rate loop_rate( 100 ); // 100 hz
     while ( ros::ok() )
     {
-        if( hexapodTeleopJoystick.NON_TELEOP == false ) // If True, assumes you are sending these from other packages
-        {
-            hexapodTeleopJoystick.cmd_vel_pub_.publish( hexapodTeleopJoystick.cmd_vel_ );
-            hexapodTeleopJoystick.body_scalar_pub_.publish( hexapodTeleopJoystick.body_scalar_ );
-            hexapodTeleopJoystick.head_scalar_pub_.publish( hexapodTeleopJoystick.head_scalar_ );
-        }
-        hexapodTeleopJoystick.state_pub_.publish( hexapodTeleopJoystick.state_ ); // Always publish for means of an emergency shutdown type situation
-        hexapodTeleopJoystick.imu_override_pub_.publish( hexapodTeleopJoystick.imu_override_ );
+       
+       // HexapodMoves.cmd_vel_pub_.publish( hexapodMoves.cmd_vel_ );
         loop_rate.sleep();
     }
 }

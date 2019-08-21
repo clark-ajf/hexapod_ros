@@ -5,7 +5,7 @@ find_package( catkin REQUIRED COMPONENTS nodelet roscpp sensor_msgs hexapod_msgs
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES hexapod_teleop_joystick 
+  LIBRARIES hexapod_moves 
   CATKIN_DEPENDS nodelet roscpp sensor_msgs hexapod_msgs
 )
 
@@ -15,7 +15,7 @@ add_executable( hexapod_moves src/hexapod_moves.cpp )
 target_link_libraries( hexapod_moves ${catkin_LIBRARIES} )
 add_dependencies( hexapod_moves hexapod_msgs_generate_messages_cpp )
 
-install(TARGETS hexapod_teleop_joystick
+install(TARGETS hexapod_moves
    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
