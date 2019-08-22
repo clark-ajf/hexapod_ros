@@ -95,5 +95,5 @@ SERVOS: {
     '16': {name: coxa_joint_LF, type: AX, id: 19, ticks: 1024, center: 512, max_radians: !degrees 300, sign: 1, offset: !degrees 0},
     '17': {name: femur_joint_LF, type: AX, id: 3, ticks: 1024, center: 512, max_radians: !degrees 300, sign: 1, offset: !degrees 14},
     '18': {name: tibia_joint_LF, type: AX, id: 5, ticks: 1024, center: 512, max_radians: !degrees 300, sign: 1, offset: !degrees -48},
-    '19': {name: head_tilt_joint, type: AX, id: 20, ticks: 1024, center: 512, max_radians: !degrees 50, sign: 1, offset: !degrees 0}
+    '19': {name: head_tilt_joint, type: AX, id: 20, ticks: 1024, center: 512, max_radians: !degrees 50, sign: -1, offset: !degrees 0}
 }

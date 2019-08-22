@@ -14,4 +14,5 @@
 	<include file="$(find hexapod_bringup)/launch/components/robot_localization_ekf.launch" />
     <include file="$(find hexapod_bringup)/launch/components/depth_laserscan.launch" />    	
     <include file="$(find hexapod_bringup)/launch/components/rtabmap.launch" />
+    <include file="$(find hexapod_navigation)/launch/move_base.launch"/>
 </launch>

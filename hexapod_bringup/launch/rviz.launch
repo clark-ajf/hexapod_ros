@@ -2,6 +2,8 @@
 <!-- rviz launch file -->
 
 <launch>
+    <arg name="config" default="phantomX"/>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find hexapod_description)/urdf/$(arg config)_model.xacro'" />
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hexapod_description)/rviz_prefs/robotViz.rviz" />
 </launch>
 
