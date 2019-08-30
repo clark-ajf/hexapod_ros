@@ -88,6 +88,7 @@ void HexapodTeleopJoystick::joyCallback( const sensor_msgs::Joy::ConstPtr &joy )
         body_scalar_.header.stamp = current_time;
         body_scalar_.accel.angular.z = joy->axes[YAW_ROTATION_AXES];
         body_scalar_.accel.angular.y = joy->axes[PITCH_ROTATION_AXES];
+        body_scalar_.accel.angular.x = joy->axes[LEFT_RIGHT_AXES];
     }
     
     else if( joy->buttons[HEAD_ROTATION_BUTTON] == 1 )

@@ -92,9 +92,9 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "hexapod_sound");
     HexapodSound hexapodSound;
 
-    hexapodSound.playSoundFile( "w_empty.wav", 3 );
-    hexapodSound.playSoundFile( "w_intelChime.wav", 3 );
-    hexapodSound.playSoundFile( "w_activeAwaitingCommands.wav", 3 );
+    hexapodSound.playSoundFile( "empty.ogg", 3 );
+    hexapodSound.playSoundFile( "intelChime.ogg", 3 );
+    hexapodSound.playSoundFile( "activeAwaitingCommands.ogg", 3 );
 
     ros::AsyncSpinner spinner( 1 ); // Using 1 threads
     spinner.start();
@@ -103,7 +103,7 @@ int main(int argc, char** argv)
     {
         if( hexapodSound.sounds_.stand == true )
         {
-            hexapodSound.playSoundFile( "w_standingUp.wav", 3 );
+            hexapodSound.playSoundFile( "standingUp.ogg", 3 );
             hexapodSound.sounds_.stand = false;
         }
 

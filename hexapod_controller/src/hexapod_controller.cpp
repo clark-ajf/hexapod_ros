@@ -83,7 +83,7 @@ int main( int argc, char **argv )
 
                 // Commit new positions and broadcast over USB2AX as well as jointStates
                 control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-                servoDriver.transmitServoPositions( control.joint_state_ );
+                //servoDriver.transmitServoPositions( control.joint_state_ );
                 control.publishOdometry( control.gait_vel_ );
                 control.publishTwist( control.gait_vel_ );
             }
@@ -102,7 +102,7 @@ int main( int argc, char **argv )
 
             // Commit new positions and broadcast over USB2AX as well as jointStates
             control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-            servoDriver.transmitServoPositions( control.joint_state_ );
+            //servoDriver.transmitServoPositions( control.joint_state_ );
             control.publishOdometry( control.gait_vel_ );
             control.publishTwist( control.gait_vel_ );
 
@@ -126,14 +126,14 @@ int main( int argc, char **argv )
 
                 // Commit new positions and broadcast over USB2AX as well as jointStates
                 control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-                servoDriver.transmitServoPositions( control.joint_state_ );
+                //servoDriver.transmitServoPositions( control.joint_state_ );
                 control.publishOdometry( control.gait_vel_ );
                 control.publishTwist( control.gait_vel_ );
             }
 
             // Release torque
             ros::Duration( 0.5 ).sleep();
-            servoDriver.freeServos();
+            //servoDriver.freeServos();
             ROS_INFO("Hexapod servos torque is now off.");
 
             // Locomotion is now shut off

@@ -5,14 +5,15 @@
     <arg name="config" default="phantomX"/>
     <arg name="joy_mapping" default="joystick_xb"/>
     <!-- Launching sound first since some packages have initial sounds -->
-    <include file="$(find hexapod_bringup)/launch/components/sounds.launch" />
+    <!--<include file="$(find hexapod_bringup)/launch/components/sounds.launch" /> -->
     <include file="$(find hexapod_bringup)/launch/hexapod_simple.launch">
       <arg name="config" value="$(arg config)"/>
       <arg name="joy_mapping" default="$(arg joy_mapping)"/>
     </include>
-        <include file="$(find hexapod_bringup)/launch/components/imu_phidgets.launch" />
-	<include file="$(find hexapod_bringup)/launch/components/robot_localization_ekf.launch" />
+    <include file="$(find hexapod_bringup)/launch/components/imu_phidgets.launch" />
+	  <include file="$(find hexapod_bringup)/launch/components/robot_localization_ekf.launch" />
     <include file="$(find hexapod_bringup)/launch/components/depth_laserscan.launch" />    	
     <include file="$(find hexapod_bringup)/launch/components/rtabmap.launch" />
     <include file="$(find hexapod_navigation)/launch/move_base.launch"/>
+    <include file="$(find respeaker_ros)/launch/respeaker.launch"/>
 </launch>

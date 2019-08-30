@@ -9,5 +9,6 @@
     <rosparam command="load" file="$(find hexapod_description)/params/$(arg joy_mapping).yaml" />
     <param name="robot_description" command="$(find xacro)/xacro '$(find hexapod_description)/urdf/$(arg config)_model.xacro'" />
     <include file="$(find hexapod_bringup)/launch/components/joy_teleop.launch" />
+    <include file="$(find hexapod_bringup)/launch/components/imu_phidgets.launch" />
     <include file="$(find hexapod_bringup)/launch/components/locomotion.launch" /> 
 </launch>

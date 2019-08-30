@@ -50,8 +50,8 @@ TIBIA_LENGTH:  0.133
 TARSUS_LENGTH: 0.00
 
 # Body FK maximum rotation
-BODY_MAX_ROLL: !degrees 8
-BODY_MAX_PITCH: !degrees 8
+BODY_MAX_ROLL: !degrees 15
+BODY_MAX_PITCH: !degrees 15
 
 # Body Standing Height
 STANDING_BODY_HEIGHT: 0.07
@@ -73,7 +73,7 @@ MAX_LIFT_HEIGHT: 0.050
 
 GAIT_STYLE: "RIPPLE"
 # Speed in Hz that the servos interpolate between gait poses
-INTERPOLATION_LOOP_RATE: 1000
+INTERPOLATION_LOOP_RATE: 750
 
 # Servo descriptions
 SERVOS: {
