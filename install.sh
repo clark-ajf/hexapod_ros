@@ -35,8 +35,8 @@ mkdir -p ~/ros_catkin_ws
 mkdir -p ~/ros_catkin_ws/src
 cd ~/ros_catkin_ws
 
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
+source /opt/ros/melodic/setup.bash
+source devel/setup.bash
 catkin_make 
 
 cd ~/ros_catkin_ws/src
