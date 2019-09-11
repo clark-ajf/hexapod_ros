@@ -6,7 +6,7 @@ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31
 sudo apt update
 sudo apt upgrade
 
-sudo apt install ros-melodic-desktop
+sudo apt install -y ros-melodic-desktop
 
 sudo apt install -y python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential cmake
 sudo apt-get install git  &&
