@@ -37,9 +37,10 @@ cd ~/ros_catkin_ws
 
 source /opt/ros/melodic/setup.bash
 source devel/setup.bash
+cd ros_catkin_ws
 catkin_make 
 
-cd ~/ros_catkin_ws/src
+cd ros_catkin_ws/src
 git -b melodic-dev clone https://github.com/CreedyNZ/hexapod_ros
 
 
