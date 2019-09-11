@@ -1,10 +1,12 @@
-sudo adduser rosmaster
-sudo usermod -aG sudo rosmaster
+sudo adduser ros
+sudo usermod -aG sudo ros
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 sudo apt update
 sudo apt upgrade
+
+sudo apt install ros-melodic-desktop
 
 sudo apt install -y python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential cmake
 sudo apt-get install git  &&
@@ -30,36 +32,21 @@ sudo rosdep init
 rosdep update
 
 mkdir -p ~/ros_catkin_ws
+mkdir -p ~/ros_catkin_ws/src
 cd ~/ros_catkin_ws
-
-rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall
-wstool init src kinetic-ros_comm-wet.rosinstall
-
-cd ~/ros_catkin_ws
-rosdep install -y --from-paths src --ignore-src --rosdistro kinetic -r --os=debian:buster
-
-
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
-
-
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
+catkin_make 
+
+cd ~/ros_catkin_ws/src
+git -b melodic-dev clone https://github.com/CreedyNZ/hexapod_ros
 
 
-# to install more packages
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source devel/setup.bash
 
-cd ~/ros_catkin_ws
-rosinstall_generator 'package name' --rosdistro kinetic --deps --wet-only --tar > kinetic-custom_ros.rosinstall
+rosdep install --from-paths src --ignore-src --rosdistro melodic -y -r --os=ubuntu:bionic
 
-wstool merge -t src kinetic-custom_ros.rosinstall
-wstool update -t src
-
-rosdep install --from-paths src --ignore-src --rosdistro kinetic -y -r --os=ubuntu:bionic
-
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
 #end install more packages
-
-
-rosinstall_generator tf2 tf move_base xacro --rosdistro kinetic --deps --wet-only --tar > kinetic-custom_ros.rosinstall
