@@ -35,19 +35,12 @@ mkdir -p ~/ros_catkin_ws
 mkdir -p ~/ros_catkin_ws/src
 cd ~/ros_catkin_ws
 
-source /opt/ros/melodic/setup.bash
+cd ~/ros_catkin_ws/src
+git clone -b melodic_dev https://github.com/CreedyNZ/hexapod_ros
+
+cd ~/ros_catkin_ws
 source devel/setup.bash
-cd ros_catkin_ws
-catkin_make 
-
-cd ros_catkin_ws/src
-git -b melodic-dev clone https://github.com/CreedyNZ/hexapod_ros
-
-
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-source devel/setup.bash
-
-rosdep install --from-paths src --ignore-src --rosdistro melodic -y -r --os=ubuntu:bionic
+catkin_make
 
 
 #end install more packages
