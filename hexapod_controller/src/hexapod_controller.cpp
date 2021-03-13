@@ -51,8 +51,9 @@ int main( int argc, char **argv )
     // Establish initial leg positions for default pose in robot publisher
     gait.gaitCycle( control.cmd_vel_, &control.feet_, &control.gait_vel_ );
     ik.calculateIK( control.feet_, control.body_, &control.legs_ );
+
     control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-    control.publishOdometry( control.gait_vel_ );
+    //control.publishOdometry( control.gait_vel_ );
     control.publishTwist( control.gait_vel_ );
 
     ros::Time current_time_, last_time_;
@@ -62,6 +63,7 @@ int main( int argc, char **argv )
     ros::AsyncSpinner spinner( 2 ); // Using 2 threads
     spinner.start();
     ros::Rate loop_rate( control.MASTER_LOOP_RATE );  // Speed limit of loop ( Will go slower than this )
+
     while( ros::ok() )
     {
         current_time_ = ros::Time::now();
@@ -83,16 +85,16 @@ int main( int argc, char **argv )
 
                 // Commit new positions and broadcast over USB2AX as well as jointStates
                 control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-                //servoDriver.transmitServoPositions( control.joint_state_ );
-                control.publishOdometry( control.gait_vel_ );
+                servoDriver.transmitServoPositions( control.joint_state_ );
+                //control.publishOdometry( control.gait_vel_ );
                 control.publishTwist( control.gait_vel_ );
             }
             control.setPrevHexActiveState( true );
         }
-
         // We are live and standing up
         if( control.getHexActiveState() == true && control.getPrevHexActiveState() == true )
         {
+            ROS_INFO_THROTTLE(1, "Live and running");
             // Gait Sequencer
             gait.gaitCycle( control.cmd_vel_, &control.feet_, &control.gait_vel_ );
             control.publishTwist( control.gait_vel_ );
@@ -102,7 +104,7 @@ int main( int argc, char **argv )
 
             // Commit new positions and broadcast over USB2AX as well as jointStates
             control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-            //servoDriver.transmitServoPositions( control.joint_state_ );
+            servoDriver.transmitServoPositions( control.joint_state_ );
             control.publishOdometry( control.gait_vel_ );
             control.publishTwist( control.gait_vel_ );
 
@@ -126,14 +128,14 @@ int main( int argc, char **argv )
 
                 // Commit new positions and broadcast over USB2AX as well as jointStates
                 control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-                //servoDriver.transmitServoPositions( control.joint_state_ );
-                control.publishOdometry( control.gait_vel_ );
+                servoDriver.transmitServoPositions( control.joint_state_ );
+                //control.publishOdometry( control.gait_vel_ );
                 control.publishTwist( control.gait_vel_ );
             }
 
             // Release torque
             ros::Duration( 0.5 ).sleep();
-            //servoDriver.freeServos();
+            servoDriver.freeServos();
             ROS_INFO("Hexapod servos torque is now off.");
 
             // Locomotion is now shut off
@@ -144,7 +146,7 @@ int main( int argc, char **argv )
         {
             ros::Duration( 0.5 ).sleep();
             control.publishJointStates( control.legs_, control.head_, &control.joint_state_ );
-            control.publishOdometry( control.gait_vel_ );
+            //control.publishOdometry( control.gait_vel_ );
             control.publishTwist( control.gait_vel_ );
         }
         loop_rate.sleep();

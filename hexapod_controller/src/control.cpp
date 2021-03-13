@@ -274,6 +274,7 @@ void Control::cmd_velCallback( const geometry_msgs::TwistConstPtr &cmd_vel_msg )
     cmd_vel_incoming_.linear.x = cmd_vel_msg->linear.x;
     cmd_vel_incoming_.linear.y = cmd_vel_msg->linear.y;
     cmd_vel_incoming_.angular.z = cmd_vel_msg->angular.z;
+    ROS_INFO_THROTTLE(1, "received cmd_vel");
 }
 
 //==============================================================================

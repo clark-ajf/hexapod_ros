@@ -62,6 +62,7 @@ ServoDriver::ServoDriver( void )
     SERVO_COUNT = servo_map_key_.size();
     OFFSET.resize( SERVO_COUNT );
     ID.resize( SERVO_COUNT );
+    ROS_INFO_STREAM("IDs: " << SERVO_COUNT);
     TICKS.resize( SERVO_COUNT );
     CENTER.resize( SERVO_COUNT );
     MAX_RADIANS.resize( SERVO_COUNT );
